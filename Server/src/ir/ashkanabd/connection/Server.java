@@ -1,13 +1,10 @@
 package ir.ashkanabd.connection;
 
-import ir.ashkanabd.Request.SendScreen;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.util.Base64;
-import java.util.List;
 import java.util.Scanner;
 
 public class Server {
@@ -25,22 +22,17 @@ public class Server {
         client.setKeepAlive(true);
         outStream = client.getOutputStream();
         inStream = client.getInputStream();
-        pw = new PrintWriter(outStream,true);
+        pw = new PrintWriter(outStream);
     }
 
-    public void sendImage(List<ImageInfo> difference) throws Exception{
-        ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(byteArr);
-        oos.writeObject(difference);
-        pw.println(Base64.getEncoder().encodeToString(byteArr.toByteArray()));
-//        pw.flush();
-    }
+    int i = 0;
 
     public void sendImage(BufferedImage image) throws Exception {
         ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", byteArr);
+        ImageIO.write(image, "jpg", byteArr);
         String line = Base64.getEncoder().encodeToString(byteArr.toByteArray());
         pw.println(line);
+        System.out.println(i++);
     }
 
     public void receive() throws Exception {

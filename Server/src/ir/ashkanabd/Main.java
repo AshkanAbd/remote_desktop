@@ -4,8 +4,14 @@ import ir.ashkanabd.Request.GetInput;
 import ir.ashkanabd.Request.SendScreen;
 import ir.ashkanabd.connection.Server;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class Main {
 
@@ -20,7 +26,7 @@ public class Main {
         main.start();
     }
 
-    private void start() throws Exception {
+    void start() throws Exception {
         server = new Server("127.0.0.1", 52000);
         getInput = new GetInput();
         server.setOnReceive(getInput::onReceive);
@@ -31,18 +37,18 @@ public class Main {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        },"Receive");
+        }, "Receive");
         socketThread.start();
         sendThread = new Thread(() -> {
             try {
                 while (true) {
-//                    server.sendImage(sendScreen.getScreen());
-                    server.sendImage(sendScreen.recordScreen());
+//                    Thread.sleep(5);
+                    server.sendImage(sendScreen.getScreen());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        },"Send");
+        }, "Send");
         sendThread.start();
     }
 }
