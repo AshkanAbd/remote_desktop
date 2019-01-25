@@ -8,4 +8,4 @@ then run server/src/ir/ashkanabd/Main.java on machine which you want to control 
         
 <b>Default port is 52000 </b>
 
-<b>Default IP is 127.0.0.1 , change it to server ip address</b>
+<b>Default IP is 127.0.0.1 , change server IP to client IP address</b>
