@@ -29,7 +29,7 @@ public class Server {
 
     public void sendImage(BufferedImage image) throws Exception {
         ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", byteArr);
+        ImageIO.write(image, "png", byteArr);
         String line = Base64.getEncoder().encodeToString(byteArr.toByteArray());
         pw.println(line);
         System.out.println(i++);
