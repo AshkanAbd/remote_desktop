@@ -25,14 +25,11 @@ public class Server {
         pw = new PrintWriter(outStream);
     }
 
-    int i = 0;
-
     public void sendImage(BufferedImage image) throws Exception {
         ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
         ImageIO.write(image, "png", byteArr);
         String line = Base64.getEncoder().encodeToString(byteArr.toByteArray());
         pw.println(line);
-        System.out.println(i++);
     }
 
     public void receive() throws Exception {
